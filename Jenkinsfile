@@ -11,10 +11,10 @@ pipeline {
 
         stage('Run Ansible Playbook') {
             steps {
-                sshagent(credentials: ['ec2-ssh-key']) {
-                    // Run ansible-playbook from the cloned repo directory
+                withCredentials([sshUserPrivateKey(credentialsId: 'ec2-ssh-key', keyFileVariable: 'SSH_KEY')]) {
+                    // Run ansible-playbook from the cloned repo directory using injected SSH key
                     sh '''
-                       ansible-playbook -i inventory.yml playbook.yml --user ec2-user --become
+                       ansible-playbook -i inventory.yml playbook.yml --user ec2-user --private-key $SSH_KEY --become
                     '''
                 }
             }
