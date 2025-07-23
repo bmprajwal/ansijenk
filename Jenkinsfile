@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Checkout your GitHub repo with playbook and inventory
-                git url: 'https://github.com/yourusername/your-repo.git', branch: 'main'
+                git url: 'https://github.com/bmprajwal/ansijenk.git', branch: 'main'
             }
         }
 
